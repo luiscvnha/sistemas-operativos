@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
 			return -2;
 		}
 	} else {
-		printf("Usage: %s [filepath]\n", argv[0]);
+		printf("Usage: %s <filepath>\n", argv[0]);
 		return -1;
 	}
 

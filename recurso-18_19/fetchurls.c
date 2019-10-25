@@ -4,8 +4,9 @@
 #include <stdlib.h>
 
 
-#define PID				0
-#define IN				1
+#define PID				0		// procs[...][0] -> PID
+#define IN				1		// procs[...][1] -> STDIN
+
 #define STDIN			STDIN_FILENO
 #define STDOUT			STDOUT_FILENO
 

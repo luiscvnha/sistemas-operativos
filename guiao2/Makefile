@@ -1,8 +1,9 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
-EXECUTABLES = ex1 ex2 ex3 ex4 ex5 ex6 ex7
+EXE = ex1 ex2 ex3 ex4 ex5 ex6 ex7
 
-#all: $(EXECUTABLES)
+
+all: $(EXE)
 
 ex7: ex7.c
 
@@ -19,4 +20,4 @@ ex2: ex2.c
 ex1: ex1.c
 
 clean:
-	rm -f $(EXECUTABLES)
+	rm -f $(EXE)

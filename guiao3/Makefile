@@ -2,7 +2,8 @@ CC = gcc
 CFLAGS = -Wall -Wextra
 EXE = ex1 ex2 ex3 ex4 ex5 ex6
 
-#all: $(EXE)
+
+all: $(EXE)
 
 ex6: ex6.c mysystem.o
 

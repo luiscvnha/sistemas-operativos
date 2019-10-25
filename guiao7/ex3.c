@@ -29,36 +29,25 @@ int main(int argc, char* argv[]) {
 	}
 
 	// Matrix
-	printf("Initializing matrix [-] ");
-	char bars[] = "|/-\\";
+	puts("Initializing matrix");
 	int* matrix[NUM_LINES];
 
 	for (int i = 0; i < NUM_LINES; ++i)
 		matrix[i] = malloc(NUM_COLS * sizeof(int));
-	int progress = 0;
 
 	for (int i = 0; i < NUM_LINES; ++i)
-		for (int j = 0; j < NUM_COLS; ++j) {
-			if (!(progress % 4000)) {
-				printf("\b\b\b%c] ", bars[(progress / 4000) % 4]);
-				//fflush(stdout);
-			}
+		for (int j = 0; j < NUM_COLS; ++j)
 			matrix[i][j] = rand() % range;
-			//usleep(10);
-			++progress;
-		}
 
-	printf("\nSearching for %d in matrix\n", target);
+	printf("Searching for %d in matrix\n", target);
 
 	// Forks
 	int childs[NUM_LINES];
 	for (int i = 0; i < NUM_LINES; ++i)
 		if (!(childs[i] = fork())) {
-			for (int j = 0; j < NUM_COLS; ++j) {
+			for (int j = 0; j < NUM_COLS; ++j)
 				if (matrix[i][j] == target)
 					_exit(1);
-				//usleep(1000);
-			}
 			_exit(0);
 		}
 

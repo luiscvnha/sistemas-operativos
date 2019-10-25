@@ -4,8 +4,9 @@
 #include <stdio.h>
 
 
-#define PID				0
-#define IN				1
+#define PID				0		// procs[...][0] -> PID
+#define IN				1		// procs[...][1] -> STDIN
+
 #define STDIN			STDIN_FILENO
 #define STDOUT			STDOUT_FILENO
 
@@ -13,7 +14,7 @@
 #define MAX_PROC		8
 
 
-static int pipes[MAX_PROC][2],		// PID, IN
+static int procs[MAX_PROC][2],
 		   num_proc = 0,			// número de processos a correr
 		   counter = 0;
 
@@ -25,18 +26,18 @@ static void sig_child_handler(int signum) {
 
 	while ((pid = waitpid(-1, &status, WNOHANG)) > 0) {
 		int i;
-		for (i = 0; pipes[i][PID] != pid; ++i);
+		for (i = 0; procs[i][PID] != pid; ++i);
 
 		if (WIFEXITED(status) && WEXITSTATUS(status) == 0) {
 			char c;
-			if (read(pipes[i][IN], &c, 1) > 0) ++counter;
+			if (read(procs[i][IN], &c, 1) > 0) ++counter;
 		} else puts("Erro a executar 'patgrep'");
 
-		close(pipes[i][IN]);
+		close(procs[i][IN]);
 
 		for (; i < num_proc - 1; ++i) {
-			pipes[i][PID] = pipes[i+1][PID];
-			pipes[i][IN] = pipes[i+1][IN];
+			procs[i][PID] = procs[i+1][PID];
+			procs[i][IN] = procs[i+1][IN];
 		}
 		
 		--num_proc;
@@ -72,8 +73,8 @@ int main(int argc, char* argv[]) {
 		} else if (pid > 0) {
 			write(pip[STDOUT], buf, CHUNK_SIZE);
 			close(pip[STDOUT]);
-			pipes[num_proc][PID] = pid;
-			pipes[num_proc][IN] = pip[STDIN];
+			procs[num_proc][PID] = pid;
+			procs[num_proc][IN] = pip[STDIN];
 		} else {
 			perror("Erro a dar fork");
 			while (wait(NULL) > 0);

@@ -4,8 +4,6 @@
 #include <stdio.h>
 
 
-#define IN				0
-#define OUT				1
 #define STDIN			STDIN_FILENO
 #define STDOUT			STDOUT_FILENO
 
@@ -50,18 +48,18 @@ int main(int argc, char* argv[]) {
 		pipe(pip);
 
 		if ((pid = fork()) == 0) {
-			close(pip[OUT]);
-			dup2(pip[IN], STDIN);
-			close(pip[IN]);
+			close(pip[STDOUT]);
+			dup2(pip[STDIN], STDIN);
+			close(pip[STDIN]);
 			char* email = "a00000@alunos.uminho.pt";
 			for (int i = 0; i < 6; ++i) email[i] = buf[i];
 			execlp("mail", "mail", "-s", "Sistemas_Operativos", email, NULL);
 			close(STDIN);
 			_exit(1);
 		} else if (pid > 0) {
-			close(pip[IN]);
-			write(pip[OUT], buf, LINE_SIZE);
-			close(pip[OUT]);
+			close(pip[STDIN]);
+			write(pip[STDOUT], buf, LINE_SIZE);
+			close(pip[STDOUT]);
 		} else {
 			perror("Erro a dar fork");
 			while (wait(NULL) > 0);

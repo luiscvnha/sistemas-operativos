@@ -3,6 +3,8 @@ CFLAGS = -Wall -Wextra
 EXE = ex1 ex2 ex3 ex4 ex5
 
 
+all: $(EXE)
+
 ex5: ex5.c
 
 ex4: ex4.c

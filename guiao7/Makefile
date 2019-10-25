@@ -3,6 +3,8 @@ CFLAGS = -Wall -Wextra
 EXE = ex1 ex2 ex3
 
 
+all: $(EXE)
+
 ex3: guiao7.h ex3.c
 
 ex2: guiao7.h ex2.c

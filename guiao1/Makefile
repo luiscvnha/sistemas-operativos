@@ -1,8 +1,9 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
-EXECUTABLES = 10mb mycat-v1 mycat-v2 nl-v1 nl-v2 mycat-v3 myhead mygrep mywc mycmp nl-v2
+EXE = 10mb mycat-v1 mycat-v2 nl-v1 nl-v2 mycat-v3 myhead mygrep mywc mycmp nl-v2
 
-#all: $(EXECUTABLES)
+
+all: $(EXE)
 
 nl-v2: nl-v2.c readln-v2.o
 
@@ -32,4 +33,4 @@ clean:
 	rm -f *.o
 
 clean-all: clean
-	rm -f $(EXECUTABLES)
+	rm -f $(EXE)
