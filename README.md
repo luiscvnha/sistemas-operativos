@@ -3,7 +3,7 @@ Universidade do Minho
 
 2018/2019
 
-> [resumos](https://luiscvnha.xyz/pages/so/so.html)
+> [resumos](https://luiscvnha.github.io/pages/so/so.html)
 
 ## por resolver
 guião | exercícios propostos | exercícios adicionais | exercícios avançados
